@@ -31,7 +31,6 @@ dotenv.config();
 
 app.get("/", async (req, res) => {
   const token = req.cookies?.token;
-  const error = "";
   if (!token) return res.render("register.ejs");
 
   const decoded = getUser(token);
@@ -43,7 +42,7 @@ app.get("/", async (req, res) => {
   if (!user) return res.redirect("/auth/register");
 
   const items = await Item.findAll();
-  res.render("index.ejs", { name: user.USERNAME, wallet: Number(user.WALLET_BAL), items, error });
+  res.render("index.ejs", { name: user.USERNAME, wallet: Number(user.WALLET_BAL), items });
 });
 
 const syncDB = async () => {
