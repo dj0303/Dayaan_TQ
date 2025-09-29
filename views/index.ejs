@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Welcome, <%= name %>!</h1>
+  <h2>Wallet Balance: <%= wallet %></h2>
+
+  <h3>Items Available:</h3>
+  <ul>
+    <% items.forEach(item => { %>
+      <li>
+        <%= item.NAME %> - ₹<%= item.PRICE %> - Stock: <%= item.STOCK %>
+        <form action="/items/buy/<%= item.IID %>" method="POST" style="display:inline;">
+          <input type="number" name="quantity" min="1" max="<%= item.STOCK %>" value="1"/>
+          <button type="submit">Buy</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  <form id="logoutForm" action="/auth/logout" method="POST" style="display: inline;">
+    <button type="submit">Logout</button>
+  </form>
+</body>
+</html>
